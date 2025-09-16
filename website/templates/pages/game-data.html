@@ -4,6 +4,7 @@
 
 {% block content %}
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <br>
     <h5>WELCOME TO THE GAME DATA DEMO PAGE</h5>
     <hr>
@@ -20,22 +21,48 @@
 
         <tbody>
 
-            {% if records %}
-                {% for record in records %}
+            {% if data %}
+                {% for record in data %}
                 <tr>
                     <td>{{record.id}}</td>
-                    <td>{{record.first_name}}  {{record.last_name}}  </td>
-                    <td>{{record.email}} </td>
-                    <td>{{record.phone}} </td>
-                    <td>{{record.address}} </td>
-                    <td>{{record.city}} </td>
-                    <td>{{record.creation_data}} </td>
-                    <td><a href="{% url 'view-record' record.id %}" class="btn btn-info">View &nbsp;<i class="fa fa-eye" aria-hidden="true"></i> </a></td>
+                    <td>{{record.character_name}}   </td>
+                    <td>{{record.stars}} </td>
+                   
+                    
 
                 </tr>
                 {% endfor %}
             {% endif %}
         </tbody>
     </table>
+
+
+    <canvas id="myChart" style="width:100%;max-width:1000px"></canvas>
+
+<script>
+new Chart("myChart", {
+    type: "doughnut",
+    data: {
+        labels: [{% for row in data %}'{{ row.character_name }}',{% endfor %}],
+        datasets: [{
+            backgroundColor: [
+                "red", "blue", "green", "orange", "purple", "yellow", "cyan", "magenta"
+            ],
+            data: [{% for row in data %}{{ row.stars }},{% endfor %}]
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: true
+            },
+            title: {
+                display: true,
+                text: "Demo"
+            }
+        }
+    }
+});
+</script>
 
 {% endblock %}

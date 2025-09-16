@@ -8,6 +8,8 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LoginForm, CreateRecordForm
 from django.contrib import messages
 from .models import Gamedata
+from django.conf import settings
+import requests
 
 # Create your views here.
 
@@ -124,3 +126,47 @@ def game_date(request):
     context = {'data': data}
 
     return render(request, 'pages/game-data.html', context = context)
+
+def weather_data(request):
+    print("loading weather view")
+    context = {}
+
+    if request.method == "POST":
+        city = request.POST.get("city")
+        key = settings.MY_API_KEY
+        print(key)
+        
+        BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q="
+        url = f"{BASE_URL}{city}&appid={key}&units=metric"  # ✅ Fixed URL + added units=metric
+        print(url)
+        response = requests.get(url)
+        json_data = response.json()
+
+        print("API response:", json_data)  # ✅ Debugging: see raw response in console
+
+        if response.status_code == 200 and "weather" in json_data:
+            data = {
+                "location": json_data.get("name", city),
+                "weather": json_data["weather"][0].get("main", "N/A"),
+                "temperature": int(json_data["main"].get("temp", 0)),
+                "min": int(json_data["main"].get("temp_min", 0)),
+                "max": int(json_data["main"].get("temp_max", 0)),
+                "icon": json_data["weather"][0].get("icon", "")
+            }
+            context = {"data": data}
+        else:
+            # ✅ Graceful error handling
+            context["error"] = json_data.get("message", "Could not fetch weather data.")
+
+    return render(request, "pages/weather-data.html", context=context)
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,5 @@
+import os
+
 """
 Django settings for crudApp project.
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'website',
     'crispy_forms',
     'crispy_bootstrap5',
+    
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -129,3 +132,5 @@ STATICFILES_DIRS = [BASE_DIR/'static']
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MY_API_KEY = os.environ.get('WEATHER_API_KEY')
