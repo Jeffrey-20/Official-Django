@@ -14,6 +14,6 @@ urlpatterns = [
     path('view-record/<int:pk>', views.view_record, name="view-record"),
     path('delete-record/<int:pk>', views.delete_record, name="delete-record"),
     path('games', views.games, name ="games"),
-    path('game-data', views.game.data, name="game-data"),
+    path('game-data', views.game_date, name="game-data"),
     
 ]
