@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vapor.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <div class="container">
+        <br>
+        {%for message in messages%}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <p id= "message-timer" class="alert alert success float-center text-center message-text">
+                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp; {{message}}
+                </p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+    <div class="container">
+    {% block content %}
+
+    {% endblock %}
+    </div>
+
+</body>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    
+    <script src="{% static 'js/app.js' %}"></script>
+</html>
+
+

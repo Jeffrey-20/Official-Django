@@ -1,0 +1,20 @@
+{% extends 'pages/base.html'%}
+
+    {% block content %}
+
+    <h1>Goodbye {{user}}</h1>
+    <p>I did my best, but the world turned it's back on me.</p>
+    
+    <a href="{% url 'login' %}">Login &nbsp; <i class="fa fa-key" aria-hidden="true"></i></a>  
+
+    <br>
+
+    <a href="{% url 'register' %}">Register an account &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+
+    <br>
+     <a href="{% url 'logout' %}">Logout  &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i> </a>
+
+     
+    {% endblock %}
+
+<!-- This is a comment for the git hub -->

@@ -1,0 +1,41 @@
+
+{% extends 'pages/base.html' %}
+
+
+{% block content %}
+
+    <br>
+    <h5>WELCOME TO THE GAME DATA DEMO PAGE</h5>
+    <hr>
+
+<table class = "table table-dark table-hover table-bordered">
+    <thead class ="table-primary">
+        <tr>
+            <th scope = "col"> ID </th>
+            <th scope = "col">  Name </th>
+            <th scope = "col"> Stars </th>
+           
+        </tr>
+    </thead>
+
+        <tbody>
+
+            {% if records %}
+                {% for record in records %}
+                <tr>
+                    <td>{{record.id}}</td>
+                    <td>{{record.first_name}}  {{record.last_name}}  </td>
+                    <td>{{record.email}} </td>
+                    <td>{{record.phone}} </td>
+                    <td>{{record.address}} </td>
+                    <td>{{record.city}} </td>
+                    <td>{{record.creation_data}} </td>
+                    <td><a href="{% url 'view-record' record.id %}" class="btn btn-info">View &nbsp;<i class="fa fa-eye" aria-hidden="true"></i> </a></td>
+
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}

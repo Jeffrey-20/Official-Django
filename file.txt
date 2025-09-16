@@ -1,0 +1,6 @@
+
+A text file
+
+I have added more text to this file 
+
+Practicing the pull functions of github
